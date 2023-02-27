@@ -22,14 +22,14 @@ describe('GasOptimizer', function () {
       const { myContract, JOIN_FEE, owner } = await loadFixture(
         deployContractFixture
       )
-      expect(await myContract.joinFee()).to.equal(JOIN_FEE)
+      expect(await myContract.getJoinFee()).to.equal(JOIN_FEE)
     })
 
     it('Should set the admin address', async function () {
       const { myContract, JOIN_FEE, owner } = await loadFixture(
         deployContractFixture
       )
-      const setOwner = await myContract.owner()
+      const setOwner = await myContract.getOwner()
       expect(setOwner.toString()).to.equal(owner.address)
     })
   })
@@ -42,7 +42,7 @@ describe('GasOptimizer', function () {
 
       await myContract.join({ value: JOIN_FEE })
 
-      const balance = await myContract.balances()
+      const balance = await myContract.getBalances()
 
       console.log('Balance: ', balance.toString())
       console.log('JOIN FEE: ', JOIN_FEE)
